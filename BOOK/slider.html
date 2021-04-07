@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="booklet/jquery-2.1.0.min.js"></script>
+    <link href="css/slider.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<img src="imagenes/arrow-left.png" id="sliderL">
+<div id="slider">
+        <img src="imagenes/imagen1.jpg"  id="1t">
+        <img src="imagenes/imagen2.jpg"  id="2t">
+        <img src="imagenes/imagen10.jpg" id="3t">
+        <img src="imagenes/imagen13.jpg" id="4t">
+        <img src="imagenes/imagen15.jpg" id="5t">
+        <img src="imagenes/imagen1.jpg"  id="6t" class="oculto">
+        <img src="imagenes/imagen2.jpg"  id="7t" class="oculto">
+        <img src="imagenes/imagen10.jpg" id="8t" class="oculto">
+        <img src="imagenes/imagen13.jpg" id="9t" class="oculto">
+        <img src="imagenes/imagen15.jpg" id="10t" class="oculto">
+</div>
+<img src="imagenes/arrow-right.png" id="sliderR">
+<script>
+    var ancho=window.innerWidth;
+    var alto=window.innerHeight;
+    $('#slider img').width(ancho *.14);
+    $('#slider img').height(alto *.35);
+    var ancho1=ancho *.14;
+    var alto1=alto *.35;
+    var ancho2=ancho *.15;
+    var alto2=alto *.4;
+    $('#slider img').hover
+    (
+    function()
+    {
+        $(this).animate({height:alto2+'px',width:ancho2+'px'});
+    },function()
+    {
+        $(this).animate({height:alto1+'px',width:ancho1})
+    }
+    );
+    //ver mas
+    var j=0;
+    var k=0;
+    $('#sliderL').click(function()
+            {
+
+                if(j==0)
+                {
+                    j=1;
+                    $('#'+j+'t').fadeOut('slow');
+                    k=j+5 ;
+                    $('#'+k+'t').delay('slow').fadeIn('slow');
+                    return j++;
+                }
+                else if(j<6)
+                {
+                    $('#'+j+'t').fadeOut('slow');
+                    k=j+5;
+                    $('#'+k+'t').delay('slow').fadeIn('slow');
+                    return j++;
+
+                }
+
+            }
+    );
+    $('#sliderR').click(function()
+            {
+                if(j>0)
+                {
+                    $('#'+j+'t').delay('slow').fadeIn('slow');
+                    k=j+5;
+                    $('#'+k+'t').fadeOut('slow');
+                    return j--;
+                }
+
+
+            }
+    );
+</script>
+</body>
+</html>

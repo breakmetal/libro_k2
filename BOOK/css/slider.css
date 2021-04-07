@@ -1,0 +1,35 @@
+#slider
+{
+    height: 200px;
+    position: absolute;
+    bottom: 40%;
+    left: 15%;
+}
+#slider ul li
+{
+    display: inline;
+}
+#sliderL
+{
+    position: absolute;
+    left: 3%;
+    bottom: 40%;
+    width: 5%;
+    height: 15%;
+}
+#sliderR
+{
+    position: absolute;
+    right: 3%;
+    bottom: 40%;
+    width: 5%;
+    height: 15%;
+}
+.oculto
+{
+    display: none;
+}
+#slider img
+{
+    border-radius: 4px;
+}

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="js/snap.svg-min.js"></script>
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/jquery-ui-1.10.4.min.js"></script>
+    <script src="js/variables.js"></script>
+    <link href="css/estiloM.css" type="text/css" rel="stylesheet">
+    <link href="css/mostrarGraficos.css" type="text/css" rel="stylesheet">
+    <script src="js/jquery-ui-1.10.4.min.js"></script>
+    <title>mapa</title>
+</head>
+<body>
+<div id="container">
+    <!--<img src="fondoM.png" id="fondo">
+     <img src="iconos/titulo.png" id="titulo">
+            <img src="iconos/pieP.png" id="pie">
+    -->
+            <div id="estMag" style="display: none" class="vEst">
+                <img src="iconos/cuencas.svg" class="imgC">
+                <h2>Cuenca Magdalena</h2>
+            </div>
+            <div id="estNeg" style="display: none" class="vEst">
+                <img src="iconos/cuencas.svg" class="imgC">
+                <h1>Cuenca Negro</h1>
+            </div>
+            <div id="estSua" style="display: none" class="vEst">
+                <img src="iconos/cuencas.svg" class="imgC">
+                <h1>Cuenca Ubaté y Suárez</h1>
+            </div>
+            <div id="estSum" style="display: none" class="vEst">
+                <img src="iconos/cuencas.svg" class="imgC">
+                <h1>Cuenca Sumapaz</h1>
+            </div>
+            <div id="estBog" style="display: none" class="vEst">
+                <img src="iconos/cuencas.svg" class="imgC">
+                <h1>Cuenca Bogotá</h1>
+            </div>
+            <div id="estCD" style="display: none" class="vEst">
+                <img src="iconos/cuencas.svg" class="imgC">
+                <h1>Machetá</h1>
+            </div>
+            <div id="estCA" style="display: none" class="vEst">
+                <img src="iconos/cuencas.svg" class="imgC">
+                <h1>Cuenca</h1>
+            </div>
+            <div id="tecacho" style="display: none"><img id="volver" src="iconos/volver.svg"></div>
+            <svg id="mapa"></svg>
+            <ul id="graficos" style="display: none">
+                <li><img src="iconos/precipitacion.svg" id="l1" class="clima" title="precipitacion"></li>
+                <li><img src="iconos/tMedia.svg" id="l2" class="clima" title="temperatura media"></li>
+                <li><img src="iconos/tMax.svg" id="l3" class="clima" title="temperatura maxima"></li>
+                <li><img src="iconos/tMin.svg" id="l4" class="clima" title="temperatura minima"></li>
+                <li><img src="iconos/brillo.svg" id="l5" class="clima" title="brillo"></li>
+                <li><img src="iconos/radiacion.svg" id="l6" class="clima" title="radiacion"></li>
+                <li><img src="iconos/humedad.svg" id="l7" class="clima" title="humedad"></li>
+                <li><img src="iconos/nivel.svg" id="l8" class="clima" title="nivel"></li>
+                <li><img src="iconos/caudales.svg" id="l9" class="clima" title="caudales"></li>
+            </ul>
+    <div id="datos"></div>
+    <div id="qZ" style="display: none"><img id="volverMapa" src="iconos/volver.svg"></div>
+    <div id="volverLibro"><a href="index.html"><img src="iconos/return13.svg" id="vL"></a></div>
+    <div id="pieF">
+        <div class="pf" id="pf1">
+            <img src="iconos/mariposa.svg" width="8%" id="mariposa">
+        </div>
+        <div class="pf" id="pf2">
+            <b>Boletín Informativo de Hidrología y Climatología 2013</b>
+        </div>
+    </div>
+</div>
+    <script>
+        var bandera;
+        var mapa=Snap('#mapa');
+        var grupo=mapa.group();
+        Snap.load('mapaLibro2.svg',function(f)
+        {
+            mapa.attr({viewBox:[0,0,1600,750]})
+            bogotaT= f.select("#bogotaT");
+            ubateT= f.select("#ubateT");
+            machetaT= f.select("#machetaT");
+            negroT= f.select("#negroT");
+            sumapazT= f.select("#sumapazT");
+            ////////////////////////////////
+            magdalena=f.select("#magdalena");
+            negro=f.select("#negro");
+            suarez=f.select("#suarez");
+            sumapaz=f.select("#sumapaz");
+            bogota=f.select("#bogota");
+            cDerecha=f.select("#cDerecha");
+            cArriba= f.select("#cArriba");
+            isla1=f.select("#isla1");
+            isla2=f.select("#isla2");
+            isla3=f.select("#isla3");
+            isla4=f.select("#isla4");
+
+
+            //cargar estaciones
+            for(var i1=1;i1<=3;i1++)
+            {
+                mag[i1]= f.select("#mag"+i1);
+            }
+            for(var i2=1;i2<=25;i2++)
+            {
+                neg[i2]= f.select("#neg"+i2);
+            }
+            for(var i3=1;i3<=65;i3++)
+            {
+                sua[i3]= f.select("#sua"+i3);
+            }
+            for(var i4=1;i4<=155;i4++)
+            {
+                bog[i4]= f.select("#bog"+i4);
+            }
+            for(var i5=1;i5<=26;i5++)
+            {
+                sum[i5]= f.select("#sum"+i5);
+            }
+            for(var i6=1;i6<=3;i6++)
+            {
+                cDA[i6]= f.select("#cDA"+i6);
+            }
+            for(var i7=1;i7<=4;i7++)
+            {
+                cLD[i7]= f.select("#cLD"+i7);
+            }
+            grupo.append(f);
+            negro.click(function()
+            {
+                grupo.animate({transform: 's1.5,700,-100' },2000,mina.easeinout())
+                magdalena.animate({opacity:'0'},1000,mina.easeinout())
+                suarez.animate({opacity:'0'},1000,mina.easeinout())
+                sumapaz.animate({opacity:'0'},1000,mina.easeinout())
+                bogota.animate({opacity:'0'},1000,mina.easeinout())
+                cDerecha.animate({opacity:'0'},1000,mina.easeinout());
+                cArriba.animate({opacity:'0'},1000,mina.easeinout())
+                isla1.animate({opacity:'0'},1000,mina.easeinout())
+                isla2.animate({opacity:'0'},1000,mina.easeinout())
+                isla3.animate({opacity:'0'},1000,mina.easeinout())
+                isla4.animate({opacity:'0'},1000,mina.easeinout())
+                for(i2=1;i2<=25;i2++)
+                {
+                    neg[i2].attr({opacity:"1"})
+                }
+                negroT.animate({opacity:'0'},1000,mina.easeinout())
+                bogotaT.animate({opacity:'0'},1000,mina.easeinout())
+                ubateT.animate({opacity:'0'},1000,mina.easeinout())
+                sumapazT.animate({opacity:'0'},1000,mina.easeinout())
+                machetaT.animate({opacity:'0'},1000,mina.easeinout())
+                $('#estNeg').fadeIn(3000);
+                $('#tecacho').fadeIn(3000)
+                $('#graficos').fadeIn("fast");
+                cargarEstaciones(2)
+                $('#vL').fadeOut(1000)
+                return bandera=2;
+            })
+            suarez.click(function()
+            {
+                grupo.animate({transform: 's2,1300,-50' },2000,mina.easeinout())
+                magdalena.animate({opacity:'0'},1000,mina.easeinout())
+                negro.animate({opacity:'0'},1000,mina.easeinout())
+                sumapaz.animate({opacity:'0'},1000,mina.easeinout())
+                bogota.animate({opacity:'0'},1000,mina.easeinout())
+                cDerecha.animate({opacity:'0'},1000,mina.easeinout());
+                cArriba.animate({opacity:'0'},1000,mina.easeinout())
+                isla1.animate({opacity:'0'},1000,mina.easeinout())
+                isla2.animate({opacity:'0'},1000,mina.easeinout())
+                isla3.animate({opacity:'0'},1000,mina.easeinout())
+                isla4.animate({opacity:'0'},1000,mina.easeinout())
+                for(i3=1;i3<=65;i3++)
+                {
+                    sua[i3].attr({opacity:"1"})
+                }
+                negroT.animate({opacity:'0'},1000,mina.easeinout())
+                bogotaT.animate({opacity:'0'},1000,mina.easeinout())
+                ubateT.animate({opacity:'0'},1000,mina.easeinout())
+                sumapazT.animate({opacity:'0'},1000,mina.easeinout())
+                machetaT.animate({opacity:'0'},1000,mina.easeinout())
+                $('#tecacho').fadeIn(3000)
+                $('#estSua').fadeIn(3000)
+                $('#graficos').fadeIn("fast");
+                cargarEstaciones(3)
+                $('#vL').fadeOut(1000)
+                return bandera=3;
+            })
+            sumapaz.click(function()
+            {
+                grupo.animate({transform: 's2,650,750' },2000,mina.easeinout())
+                magdalena.animate({opacity:'0'},1000,mina.easeinout())
+                negro.animate({opacity:'0'},1000,mina.easeinout())
+                suarez.animate({opacity:'0'},1000,mina.easeinout())
+                bogota.animate({opacity:'0'},1000,mina.easeinout())
+                cDerecha.animate({opacity:'0'},1000,mina.easeinout());
+                cArriba.animate({opacity:'0'},1000,mina.easeinout())
+                isla1.animate({opacity:'0'},1000,mina.easeinout())
+                isla2.animate({opacity:'0'},1000,mina.easeinout())
+                isla3.animate({opacity:'0'},1000,mina.easeinout())
+                isla4.animate({opacity:'0'},1000,mina.easeinout())
+                for(var i5=1;i5<=26;i5++)
+                {
+                    sum[i5].attr({opacity:"1"})
+                }
+                negroT.animate({opacity:'0'},1000,mina.easeinout())
+                bogotaT.animate({opacity:'0'},1000,mina.easeinout())
+                ubateT.animate({opacity:'0'},1000,mina.easeinout())
+                sumapazT.animate({opacity:'0'},1000,mina.easeinout())
+                machetaT.animate({opacity:'0'},1000,mina.easeinout())
+                $('#tecacho').fadeIn(3000)
+                $('#estSum').fadeIn(3000)
+                $('#graficos').fadeIn("fast");
+                cargarEstaciones(4)
+                $('#vL').fadeOut(1000)
+                return bandera=4;
+            })
+            bogota.click(function()
+            {
+                grupo.animate({transform: 's1.5,900,350' },2000,mina.easeinout())
+                magdalena.animate({opacity:'0'},1000,mina.easeinout())
+                negro.animate({opacity:'0'},1000,mina.easeinout())
+                suarez.animate({opacity:'0'},1000,mina.easeinout())
+                sumapaz.animate({opacity:'0'},1000,mina.easeinout())
+                cDerecha.animate({opacity:'0'},1000,mina.easeinout());
+                cArriba.animate({opacity:'0'},1000,mina.easeinout())
+                isla1.animate({opacity:'0'},1000,mina.easeinout())
+                isla2.animate({opacity:'0'},1000,mina.easeinout())
+                isla3.animate({opacity:'0'},1000,mina.easeinout())
+                isla4.animate({opacity:'0'},1000,mina.easeinout())
+                for(var i4=1;i4<=155;i4++)
+                {
+                    bog[i4].attr({opacity:"1"})
+                }
+                negroT.animate({opacity:'0'},1000,mina.easeinout())
+                bogotaT.animate({opacity:'0'},1000,mina.easeinout())
+                ubateT.animate({opacity:'0'},1000,mina.easeinout())
+                sumapazT.animate({opacity:'0'},1000,mina.easeinout())
+                machetaT.animate({opacity:'0'},1000,mina.easeinout())
+                $('#tecacho').fadeIn(3000)
+                $('#estBog').fadeIn(3000)
+                $('#graficos').fadeIn("fast");
+                cargarEstaciones(5)
+                $('#vL').fadeOut(1000)
+                return bandera=5;
+            })
+            cDerecha.click(function()
+            {
+                grupo.animate({transform: 's3,1300,200' },2000,mina.easeinout())
+                magdalena.animate({opacity:'0'},1000,mina.easeinout())
+                negro.animate({opacity:'0'},1000,mina.easeinout())
+                suarez.animate({opacity:'0'},1000,mina.easeinout())
+                sumapaz.animate({opacity:'0'},1000,mina.easeinout())
+                bogota.animate({opacity:'0'},1000,mina.easeinout());
+                cArriba.animate({opacity:'0'},1000,mina.easeinout())
+                isla1.animate({opacity:'0'},1000,mina.easeinout())
+                isla2.animate({opacity:'0'},1000,mina.easeinout())
+                isla3.animate({opacity:'0'},1000,mina.easeinout())
+                isla4.animate({opacity:'0'},1000,mina.easeinout())
+                for(var i7=1;i7<=4;i7++)
+                {
+                    cLD[i7].attr({opacity:"1"})
+                }
+                negroT.animate({opacity:'0'},1000,mina.easeinout())
+                bogotaT.animate({opacity:'0'},1000,mina.easeinout())
+                ubateT.animate({opacity:'0'},1000,mina.easeinout())
+                sumapazT.animate({opacity:'0'},1000,mina.easeinout())
+                machetaT.animate({opacity:'0'},1000,mina.easeinout())
+                $('#tecacho').fadeIn(3000)
+                $('#estCD').fadeIn(3000)
+                $('#graficos').fadeIn("fast");
+                cargarEstaciones(6)
+                $('#vL').fadeOut(1000)
+                return bandera=6;
+            })
+            cArriba.click(function()
+            {
+                grupo.animate({transform: 's3,920,100' },2000,mina.easeinout())
+                magdalena.animate({opacity:'0'},1000,mina.easeinout())
+                negro.animate({opacity:'0'},1000,mina.easeinout())
+                suarez.animate({opacity:'0'},1000,mina.easeinout())
+                sumapaz.animate({opacity:'0'},1000,mina.easeinout())
+                bogota.animate({opacity:'0'},1000,mina.easeinout());
+                cDerecha.animate({opacity:'0'},1000,mina.easeinout())
+                isla1.animate({opacity:'0'},1000,mina.easeinout())
+                isla2.animate({opacity:'0'},1000,mina.easeinout())
+                isla3.animate({opacity:'0'},1000,mina.easeinout())
+                isla4.animate({opacity:'0'},1000,mina.easeinout())
+                for(var i6=1;i6<=2;i6++)
+                {
+                    cDA[i6].attr({opacity:"1"})
+                }
+                negroT.animate({opacity:'0'},1000,mina.easeinout())
+                bogotaT.animate({opacity:'0'},1000,mina.easeinout())
+                ubateT.animate({opacity:'0'},1000,mina.easeinout())
+                sumapazT.animate({opacity:'0'},1000,mina.easeinout())
+                machetaT.animate({opacity:'0'},1000,mina.easeinout())
+                $('#estCA').fadeIn(3000)
+                $('#graficos').fadeIn("fast");
+                $('#tecacho').fadeIn(3000)
+                $('#vL').fadeOut(1000)
+                cargarEstaciones(7)
+                return bandera=7;
+            })
+        });
+    </script>
+<script src="js/rotar.js"></script>
+<script src="js/clicks.js"></script>
+<script src="js/graficos.js"></script>
+<script src="js/estaciones.js"></script>
+<script src="js/retorno.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+.mR
+{
+    display: none;
+}
+.m
+{
+    -webkit-box-reflect: below 2px -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(250, 250, 250, 0.2)));
+
+}

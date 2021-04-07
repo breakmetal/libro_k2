@@ -1,0 +1,34 @@
+body
+{
+    margin: 0px;
+
+}
+#fondo
+{
+    position:absolute;
+    position:fixed;
+    z-index:-1;
+    opacity:0.5;
+    left:0;
+    right:0;
+}
+#mybook
+{
+    top:15%;
+}
+.oculto img
+{
+    display: none;
+}
+
+#menuZ
+{
+    background-color: #000000;
+    border-radius: 8px;
+    position: fixed;
+    opacity: 0.4;
+}
+a:link
+{
+    color: #ffffff;
+}

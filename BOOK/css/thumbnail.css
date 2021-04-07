@@ -1,0 +1,33 @@
+.thumnail li
+{
+    display: inline;
+    position: relative;
+}
+li img
+{
+    border-radius:10px;
+    margin-left: 1px;
+}
+.thumnail #leftThumnail
+{
+    position: relative;
+    left: 29%;
+    width: 80px;
+    height: 90px;
+}
+.thumnail #rightThumnail
+{
+    position: relative;
+    right: -29%;
+    width: 80px;
+    height: 90px;
+}
+
+
+#divThumnail
+{
+    width: 75%;
+    position:absolute;
+    bottom: 20%;
+    left:12%;
+}

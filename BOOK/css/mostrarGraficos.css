@@ -1,0 +1,29 @@
+
+#container{perspective :  500px ;}
+
+#rotar
+{
+    position: absolute;
+    right: 10%;
+    z-index: 999;
+}
+#datos
+{
+    position: absolute;
+    right: 10%;
+    width: 30%;
+}
+#qZ
+{
+  position: absolute;
+  z-index: 999;
+  left: 50%;
+}
+.clima{width: 40%}
+#volverLibro
+{
+    position: absolute;
+    z-index: 999;
+    right: 5%;
+}
+
